@@ -2,8 +2,8 @@ import { useState } from 'react'
 import { SalesVoiceChat } from './components/SalesVoiceChat'
 
 function App() {
-  // You'll need to replace this with your actual ElevenLabs agent ID
-  const AGENT_ID = "X7ypXaLtc1B6WE5xL7u1" 
+  // Get agent ID from environment variable
+  const AGENT_ID = import.meta.env.VITE_AGENT_ID
 
   return (
     <div className="min-h-screen bg-gray-100">
