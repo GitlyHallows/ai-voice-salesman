@@ -105,13 +105,13 @@ export function SalesVoiceChat({ agentId, apiKey, autoStart = false }: SalesVoic
     cleanupResources();
   }, [cleanupResources]);
   
-  // Cleanup on unmount
+  // Cleanup on unmount and when API key changes
   useEffect(() => {
     return () => {
-      console.log('Component unmounting, cleaning up...');
+      console.log('Component unmounting or API key changed, cleaning up...');
       cleanupResources();
     };
-  }, [cleanupResources]);
+  }, [cleanupResources, apiKey]); // Added apiKey dependency
   
   return (
     <div className="fixed bottom-4 right-4 flex flex-col items-end gap-2">
