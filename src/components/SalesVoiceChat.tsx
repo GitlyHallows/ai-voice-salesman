@@ -4,6 +4,7 @@ import { Mic, MicOff } from 'lucide-react';
 
 interface SalesVoiceChatProps {
   agentId: string;
+  apiKey: string;
 }
 
 // Global variables to persist across component renders
@@ -11,7 +12,7 @@ let globalConversation: any = null;
 let globalMicStream: MediaStream | null = null;
 let reconnectTimeout: number | null = null;
 
-export function SalesVoiceChat({ agentId }: SalesVoiceChatProps) {
+export function SalesVoiceChat({ agentId, apiKey }: SalesVoiceChatProps) {
   const [isConnected, setIsConnected] = useState(false);
   const [isListening, setIsListening] = useState(false);
   
@@ -70,9 +71,10 @@ export function SalesVoiceChat({ agentId }: SalesVoiceChatProps) {
       globalMicStream = stream;
       console.log('Microphone permission granted, starting ElevenLabs session');
       
-      // Configure ElevenLabs session
+      // Configure ElevenLabs session with API key
       const conversationOptions = {
         agentId,
+        apiKey,
         onConnect: () => {
           console.log('Connected to ElevenLabs API');
           setIsConnected(true);
@@ -121,7 +123,7 @@ export function SalesVoiceChat({ agentId }: SalesVoiceChatProps) {
       console.error('Failed to start conversation:', error);
       cleanupResources();
     }
-  }, [agentId, cleanupResources]);
+  }, [agentId, apiKey, cleanupResources]);
   
   // Stop conversation method
   const stopConversation = useCallback(() => {
