@@ -5,14 +5,13 @@ import { Mic, MicOff } from 'lucide-react';
 interface SalesVoiceChatProps {
   agentId: string;
   apiKey: string;
-  autoStart?: boolean;
 }
 
 // Global variables to persist across component renders
 let globalConversation: any = null;
 let globalMicStream: MediaStream | null = null;
 
-export function SalesVoiceChat({ agentId, apiKey, autoStart = false }: SalesVoiceChatProps) {
+export function SalesVoiceChat({ agentId, apiKey }: SalesVoiceChatProps) {
   const [isConnected, setIsConnected] = useState(false);
   const [isListening, setIsListening] = useState(false);
   

@@ -109,7 +109,6 @@ function App() {
           key={apiKey} // Add key prop to force recreation when API key changes
           agentId={AGENT_ID} 
           apiKey={apiKey} 
-          autoStart={true}
         />
       )}
     </div>
