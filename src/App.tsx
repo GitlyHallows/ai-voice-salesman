@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { SalesVoiceChat } from './components/SalesVoiceChat'
 
 function App() {
