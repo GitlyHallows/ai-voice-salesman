@@ -20,22 +20,32 @@ StyleSync AI is an innovative virtual sales assistant that helps customers make 
 
 You can try out the StyleSync AI Sales Assistant directly at: https://gleaming-druid-90aee5.netlify.app/
 
+## Getting Started
+
+To use the StyleSync AI Sales Assistant:
+
+1. Visit the application URL
+2. Get your ElevenLabs API key:
+   - Sign up at [ElevenLabs](https://try.elevenlabs.io/2rk039fqhy1u)
+   - Copy your API key from the dashboard
+3. Enter your API key in the application
+4. Click "Start Assistant" to begin
+5. Use the microphone button to control the conversation:
+   - Blue button: Click to start speaking
+   - Red button: Click to stop the conversation
+
+Your API key will be securely saved in your browser for future visits. You can change it anytime using the settings icon in the top-right corner.
+
 ## Running Locally
 
 If you want to run your own instance of the assistant:
 
 1. Clone this repository
-2. Create a `.env` file and add your ElevenLabs API key. The agent ID is preconfigured for the StyleSync assistant.
-   ```
-   VITE_AGENT_ID=X7ypXaLtc1B6WE5xL7u1
-   VITE_ELEVENLABS_API_KEY=your_elevenlabs_api_key
-   ```
-   You can get your ElevenLabs API key from the [ElevenLabs dashboard](https://try.elevenlabs.io/2rk039fqhy1u).
-3. Install dependencies:
+2. Install dependencies:
    ```bash
    npm install
    ```
-4. Run the development server:
+3. Run the development server:
    ```bash
    npm run dev
    ```
@@ -46,6 +56,10 @@ If you want to run your own instance of the assistant:
 - Vite
 - TailwindCSS
 - ElevenLabs Voice AI
+
+## Security Note
+
+Your ElevenLabs API key is stored locally in your browser's localStorage. It's never transmitted to any server except ElevenLabs' API. The key persists across browser sessions but can be changed or removed at any time through the application's settings.
 
 ## License
 
