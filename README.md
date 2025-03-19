@@ -16,14 +16,21 @@ StyleSync AI is an innovative virtual sales assistant that helps customers make 
 - **Social Events**: First dates, casual meetups, family gatherings
 - **Travel Planning**: Packing suggestions, seasonal wardrobes
 
-## Getting Started
+## Quick Access
 
-1. Clone the repository
-2. Create a `.env` file with required environment variables:
+You can try out the StyleSync AI Sales Assistant directly at: https://gleaming-druid-90aee5.netlify.app/
+
+## Running Locally
+
+If you want to run your own instance of the assistant:
+
+1. Clone this repository
+2. Create a `.env` file and add your ElevenLabs API key. The agent ID is preconfigured for the StyleSync assistant.
    ```
-   VITE_AGENT_ID=your_agent_id
-   VITE_ELEVENLABS_API_KEY=your_api_key
+   VITE_AGENT_ID=X7ypXaLtc1B6WE5xL7u1
+   VITE_ELEVENLABS_API_KEY=your_elevenlabs_api_key
    ```
+   You can get your ElevenLabs API key from the [ElevenLabs dashboard](https://try.elevenlabs.io/2rk039fqhy1u).
 3. Install dependencies:
    ```bash
    npm install
@@ -33,23 +40,12 @@ StyleSync AI is an innovative virtual sales assistant that helps customers make 
    npm run dev
    ```
 
-## Environment Variables
-
-The following environment variables are required:
-
-- `VITE_AGENT_ID`: Your ElevenLabs agent ID
-- `VITE_ELEVENLABS_API_KEY`: Your ElevenLabs API key
-
 ## Tech Stack
 
 - React + TypeScript
 - Vite
 - TailwindCSS
 - ElevenLabs Voice AI
-
-## Deployment
-
-This project can be deployed on Netlify. Make sure to configure the environment variables in your Netlify dashboard.
 
 ## License
 
