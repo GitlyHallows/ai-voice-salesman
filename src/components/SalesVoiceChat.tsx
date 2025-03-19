@@ -5,26 +5,20 @@ import { Mic, MicOff } from 'lucide-react';
 interface SalesVoiceChatProps {
   agentId: string;
   apiKey: string;
+  autoStart?: boolean;
 }
 
 // Global variables to persist across component renders
 let globalConversation: any = null;
 let globalMicStream: MediaStream | null = null;
-let reconnectTimeout: number | null = null;
 
-export function SalesVoiceChat({ agentId, apiKey }: SalesVoiceChatProps) {
+export function SalesVoiceChat({ agentId, apiKey, autoStart = false }: SalesVoiceChatProps) {
   const [isConnected, setIsConnected] = useState(false);
   const [isListening, setIsListening] = useState(false);
   
   // Cleanup function that can be called from various places
   const cleanupResources = useCallback(() => {
     console.log('Cleaning up ElevenLabs resources');
-    
-    // Clear any reconnection timeouts
-    if (reconnectTimeout !== null) {
-      window.clearTimeout(reconnectTimeout);
-      reconnectTimeout = null;
-    }
     
     // Stop microphone tracks if they exist
     if (globalMicStream) {
@@ -82,31 +76,11 @@ export function SalesVoiceChat({ agentId, apiKey }: SalesVoiceChatProps) {
         },
         onDisconnect: () => {
           console.log('Disconnected from ElevenLabs API');
-          
-          // Check if this was due to component unmounting
-          if (globalConversation) {
-            console.log('Unexpected disconnect, attempting to reconnect...');
-            
-            // Attempt to reconnect after a delay
-            reconnectTimeout = window.setTimeout(() => {
-              if (globalMicStream) {
-                // We don't need to stop the stream here as we'll reuse it
-                startConversation().catch(err => {
-                  console.error('Failed to reconnect:', err);
-                  cleanupResources();
-                });
-              } else {
-                cleanupResources();
-              }
-            }, 1000);
-          } else {
-            // Normal disconnect or component unmounted
-            cleanupResources();
-          }
+          cleanupResources();
         },
         onError: (error: any) => {
           console.error('Conversation error:', error);
-          // Don't disconnect immediately on error
+          cleanupResources();
         },
         onModeChange: (mode: { mode: string }) => {
           console.log('Mode changed:', mode);
@@ -133,37 +107,11 @@ export function SalesVoiceChat({ agentId, apiKey }: SalesVoiceChatProps) {
   
   // Cleanup on unmount
   useEffect(() => {
-    // Return cleanup function for when component unmounts
     return () => {
       console.log('Component unmounting, cleaning up...');
       cleanupResources();
     };
   }, [cleanupResources]);
-  
-  // Add ping to keep connection alive
-  useEffect(() => {
-    if (isConnected) {
-      const pingInterval = setInterval(() => {
-        if (globalConversation) {
-          console.log('Sending ping to keep connection alive');
-          // Note: if ping() doesn't exist in the API, this won't cause an error
-          // but won't do anything either
-          try {
-            // @ts-ignore - This might not be in the type definitions
-            if (typeof globalConversation.ping === 'function') {
-              globalConversation.ping();
-            }
-          } catch (error) {
-            // Ignore errors from ping attempts
-          }
-        }
-      }, 5000);
-      
-      return () => {
-        clearInterval(pingInterval);
-      };
-    }
-  }, [isConnected]);
   
   return (
     <div className="fixed bottom-4 right-4 flex flex-col items-end gap-2">
