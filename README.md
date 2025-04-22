@@ -18,7 +18,7 @@ StyleSync AI is an innovative virtual sales assistant that helps customers make 
 
 ## Quick Access
 
-You can try out the StyleSync AI Sales Assistant directly at: https://gleaming-druid-90aee5.netlify.app/
+You can try out the StyleSync AI Sales Assistant directly at: https://stylesyncai.netlify.app/
 
 ## Getting Started
 
